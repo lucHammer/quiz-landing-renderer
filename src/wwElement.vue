@@ -87,7 +87,7 @@
         <ul class="quiz-list">
           <li v-for="entry in benefits" :key="entry.text" class="quiz-list__item">
             <span class="quiz-list__emoji" aria-hidden="true">{{ entry.emoji }}</span>
-            <span>{{ entry.text }}</span>
+            <div class="quiz-list__content" v-html="entry.html"></div>
           </li>
         </ul>
         <button
@@ -116,7 +116,7 @@
         <div v-if="presentationItems.length" class="quiz-rich-list">
           <article v-for="entry in presentationItems" :key="entry.text" class="quiz-rich-list__item">
             <span class="quiz-list__emoji" aria-hidden="true">{{ entry.emoji }}</span>
-            <div v-html="entry.html"></div>
+            <div class="quiz-list__content" v-html="entry.html"></div>
           </article>
         </div>
         <button class="quiz-landing__button quiz-landing__button--secondary" type="button" @click="emitAction('presentation')">
@@ -141,7 +141,7 @@
         <ul class="quiz-list">
           <li v-for="entry in tasks" :key="entry.text" class="quiz-list__item">
             <span class="quiz-list__emoji" aria-hidden="true">{{ entry.emoji }}</span>
-            <span>{{ entry.text }}</span>
+            <div class="quiz-list__content" v-html="entry.html"></div>
           </li>
         </ul>
         <button
@@ -697,7 +697,7 @@ export default {
 .quiz-rich-list__item {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
-  align-items: center;
+  align-items: start;
   gap: 16px;
   text-align: left;
 }
@@ -711,15 +711,35 @@ export default {
   line-height: 1;
 }
 
+.quiz-list__content {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.quiz-list__content :deep(p) {
+  margin: 0;
+}
+
+.quiz-list__content :deep(p + p) {
+  margin-top: 10px;
+}
+
+.quiz-list__content :deep(strong),
+.quiz-list__content :deep(b) {
+  font-weight: 700;
+}
+
+.quiz-list__content :deep(br + br) {
+  display: none;
+}
+
 .quiz-rich-list {
   display: grid;
   gap: 34px;
   width: min(100%, 560px);
   margin-top: 42px;
-}
-
-.quiz-rich-list__item :deep(p) {
-  margin: 0;
 }
 
 .quiz-landing__footer {
