@@ -1,0 +1,13 @@
+{
+  "name": "quiz-landing-renderer",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "weweb build",
+    "build:local": "weweb build -- name=quizLandingRenderer type=wwobject",
+    "serve": "weweb serve"
+  },
+  "devDependencies": {
+    "@weweb/cli": "latest"
+  },
+  "dependencies": {}
+}
