@@ -302,6 +302,7 @@ export default {
       '--quiz-muted': content.value.mutedColor || '#667085',
       '--quiz-border': content.value.borderColor || '#d8e0ea',
       '--quiz-content-width': cssLength(content.value.contentWidth, '550px'),
+      '--quiz-heading-content-width': cssLength(content.value.headingContentWidth, '430px'),
       '--quiz-button-width': cssLength(content.value.buttonWidth, '315px'),
       '--quiz-button-height': cssLength(content.value.buttonHeight, '72px'),
       '--quiz-radius': `${numberOrFallback(content.value.borderRadius, 8)}px`,
@@ -309,6 +310,9 @@ export default {
       '--quiz-heading-font': content.value.headingFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
       '--quiz-heading-size': `${numberOrFallback(content.value.headingFontSize, 26)}px`,
       '--quiz-heading-weight': numberOrFallback(content.value.headingFontWeight, 700),
+      '--quiz-heading-subline-font': content.value.headingSublineFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
+      '--quiz-heading-subline-size': `${numberOrFallback(content.value.headingSublineFontSize, 18)}px`,
+      '--quiz-heading-subline-weight': numberOrFallback(content.value.headingSublineFontWeight, 600),
       '--quiz-button-font': content.value.buttonFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
       '--quiz-button-size': `${numberOrFallback(content.value.buttonFontSize, 20)}px`,
       '--quiz-button-weight': numberOrFallback(content.value.buttonFontWeight, 700),
@@ -428,7 +432,7 @@ export default {
 }
 
 .quiz-block--title {
-  max-width: var(--quiz-content-width);
+  max-width: var(--quiz-heading-content-width);
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
@@ -581,7 +585,7 @@ export default {
 }
 
 .quiz-block__section-title {
-  max-width: var(--quiz-content-width);
+  max-width: var(--quiz-heading-content-width);
   font-family: var(--quiz-heading-font);
   font-size: var(--quiz-heading-size);
   font-weight: var(--quiz-heading-weight);
@@ -589,10 +593,11 @@ export default {
 }
 
 .quiz-block__section-subtitle {
-  max-width: var(--quiz-content-width);
+  max-width: var(--quiz-heading-content-width);
   margin-top: 12px;
-  font-size: 18px;
-  font-weight: 600;
+  font-family: var(--quiz-heading-subline-font);
+  font-size: var(--quiz-heading-subline-size);
+  font-weight: var(--quiz-heading-subline-weight);
   line-height: 1.3;
 }
 

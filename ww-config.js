@@ -204,6 +204,12 @@ export default {
       bindable: true,
       defaultValue: '550px'
     },
+    headingContentWidth: {
+      label: { en: 'Heading content width' },
+      type: 'Text',
+      bindable: true,
+      defaultValue: '430px'
+    },
     buttonWidth: {
       label: { en: 'Button width' },
       type: 'Text',
@@ -234,6 +240,26 @@ export default {
       type: 'Number',
       bindable: true,
       defaultValue: 700,
+      options: { min: 100, max: 1000, step: 100 }
+    },
+    headingSublineFontFamily: {
+      label: { en: 'Heading subline font family' },
+      type: 'FontFamily',
+      bindable: true,
+      defaultValue: 'Inter'
+    },
+    headingSublineFontSize: {
+      label: { en: 'Heading subline font size' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 18,
+      options: { min: 8, max: 48, step: 1 }
+    },
+    headingSublineFontWeight: {
+      label: { en: 'Heading subline font weight' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 600,
       options: { min: 100, max: 1000, step: 100 }
     },
     buttonFontFamily: {
