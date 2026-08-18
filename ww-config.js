@@ -238,10 +238,27 @@ export default {
     },
     maxWidth: {
       label: { en: 'Max width' },
-      type: 'Number',
+      type: 'Text',
       bindable: true,
-      defaultValue: 860,
-      options: { min: 320, max: 1400, step: 10 }
+      defaultValue: '860px'
+    },
+    contentWidth: {
+      label: { en: 'Content width' },
+      type: 'Text',
+      bindable: true,
+      defaultValue: '550px'
+    },
+    buttonWidth: {
+      label: { en: 'Button width' },
+      type: 'Text',
+      bindable: true,
+      defaultValue: '315px'
+    },
+    buttonHeight: {
+      label: { en: 'Button height' },
+      type: 'Text',
+      bindable: true,
+      defaultValue: '66px'
     },
     borderRadius: {
       label: { en: 'Border radius' },
