@@ -449,11 +449,11 @@ export default {
 
 .quiz-block {
   width: 100%;
-  margin-top: 26px;
+  margin-top: 24px;
 }
 
 .quiz-block--title {
-  max-width: 620px;
+  max-width: 560px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -462,21 +462,22 @@ export default {
   margin: 0 0 8px;
   color: var(--quiz-primary);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
   text-transform: uppercase;
 }
 
 .quiz-block__headline {
-  font-size: 34px;
-  font-weight: 850;
-  line-height: 1.12;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.14;
 }
 
 .quiz-block--cta {
   display: grid;
   justify-items: center;
-  gap: 18px;
+  gap: 16px;
+  margin-top: 48px;
 }
 
 .quiz-block__button-images {
@@ -501,16 +502,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: min(100%, 360px);
-  min-height: 78px;
-  padding: 16px 24px;
+  width: min(100%, 315px);
+  min-height: 90px;
+  padding: 15px 22px;
   border: 0;
   border-radius: var(--quiz-radius);
   background: var(--quiz-primary);
   color: #ffffff;
   font: inherit;
-  font-size: 25px;
-  font-weight: 850;
+  font-size: 20px;
+  font-weight: 700;
   line-height: 1.1;
   cursor: pointer;
   box-shadow: 0 14px 30px color-mix(in srgb, var(--quiz-primary) 18%, transparent);
@@ -518,20 +519,22 @@ export default {
 
 .quiz-landing__button small {
   margin-top: 8px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .quiz-landing__button--secondary {
   min-height: 58px;
   margin-top: 24px;
   font-size: 18px;
+  font-weight: 700;
 }
 
 .quiz-block--compact {
   display: grid;
   justify-items: center;
-  gap: 8px;
+  gap: 6px;
+  margin-top: 26px;
 }
 
 .quiz-block__icon {
@@ -540,14 +543,14 @@ export default {
 }
 
 .quiz-block__plain {
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 1.35;
 }
 
 .quiz-block__main-benefit {
-  font-size: 22px;
-  font-weight: 850;
+  font-size: 18px;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -564,14 +567,15 @@ export default {
 
 .quiz-list--top {
   gap: 4px;
-  font-size: 18px;
-  font-weight: 850;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1.2;
 }
 
 .quiz-block--media {
   display: grid;
   justify-items: center;
+  margin-top: 30px;
 }
 
 .quiz-block__image {
@@ -620,7 +624,7 @@ export default {
   left: 18px;
   bottom: 16px;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .quiz-block--list,
@@ -631,16 +635,16 @@ export default {
 
 .quiz-block__section-title {
   max-width: 560px;
-  font-size: 38px;
-  font-weight: 850;
+  font-size: 32px;
+  font-weight: 700;
   line-height: 1.08;
 }
 
 .quiz-block__section-subtitle {
   max-width: 520px;
   margin-top: 10px;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   line-height: 1.3;
 }
 
@@ -710,8 +714,8 @@ export default {
   }
 
   .quiz-landing__button {
-    min-height: 70px;
-    font-size: 22px;
+    min-height: 86px;
+    font-size: 20px;
   }
 
   .quiz-block__headline {
@@ -719,11 +723,11 @@ export default {
   }
 
   .quiz-block__main-benefit {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .quiz-block__section-title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .quiz-block__section-subtitle {
