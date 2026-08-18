@@ -612,7 +612,7 @@ export default {
 .quiz-rich-list__item {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
-  align-items: start;
+  align-items: center;
   gap: 16px;
   text-align: left;
 }
