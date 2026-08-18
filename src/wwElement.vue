@@ -507,7 +507,6 @@ export default {
 
 .quiz-landing__button--secondary small {
   margin-top: 6px;
-  font-size: 12px;
 }
 
 .quiz-block--compact {
