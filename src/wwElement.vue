@@ -1,30 +1,5 @@
 <template>
   <main class="quiz-landing" :style="rootStyle">
-    <header v-if="showLogo && logoSrc" class="quiz-landing__header">
-      <img
-        class="quiz-landing__logo"
-        :src="logoSrc"
-        :alt="companyName"
-        loading="eager"
-        decoding="async"
-      >
-    </header>
-
-    <section v-if="showIntro" class="quiz-landing__intro">
-      <div class="quiz-landing__line">
-        <img
-          v-if="contactImageSrc"
-          class="quiz-landing__avatar"
-          :src="contactImageSrc"
-          :alt="contactName"
-          loading="eager"
-          decoding="async"
-        >
-      </div>
-      <h2 class="quiz-landing__intro-title">{{ introTitle }}</h2>
-      <p class="quiz-landing__intro-text">{{ introText }}</p>
-    </section>
-
     <template v-for="item in visibleItems" :key="item.key">
       <section v-if="item.type === 'title'" class="quiz-block quiz-block--title">
         <p v-if="eyebrow" class="quiz-block__eyebrow">{{ eyebrow }}</p>
@@ -308,12 +283,6 @@ export default {
     }
 
     const companyName = computed(() => text(content.value.companyName) || text(quiz.value.company?.company_display_name) || text(quiz.value.company?.companyName) || 'Hammerjobs');
-    const logoSrc = computed(() => normalizeUrl(content.value.logoUrl || quiz.value.company?.logo_optimized?.url || quiz.value.company?.logo?.url));
-    const contactName = computed(() => text(quiz.value.contact?.name) || text(content.value.contactName) || 'Luisa');
-    const contactImageSrc = computed(() => normalizeUrl(content.value.contactImageUrl || quiz.value.contact?.image?.url || imageByKey('image_contactperson')));
-
-    const introTitle = computed(() => text(content.value.introTitle) || `Hi, ich bin ${contactName.value}!`);
-    const introText = computed(() => text(content.value.introText) || 'Bitte beantworten Sie uns ein paar kurze Fragen, um herauszufinden, ob der Job zu Ihnen passt.');
     const headline = computed(() => text(content.value.headline) || `Neugierig, warum sich ein Wechsel als ${text(quiz.value.positionName) || 'dieser Job'} lohnt?`);
     const eyebrow = computed(() => text(content.value.eyebrow));
     const locationDisplay = computed(() => text(content.value.locationDisplay) || text(quiz.value.location_display));
@@ -352,8 +321,6 @@ export default {
       '--quiz-font': content.value.fontFamily || 'Inter, system-ui, sans-serif'
     }));
 
-    const showLogo = computed(() => content.value.showLogo !== false);
-    const showIntro = computed(() => content.value.showIntro !== false);
     const showFooter = computed(() => content.value.showFooter !== false);
 
     function emitAction(action) {
@@ -413,8 +380,6 @@ export default {
       buttonLeftSrc,
       buttonRightSrc,
       companyName,
-      contactImageSrc,
-      contactName,
       emitAction,
       emitImageError,
       emitImageLoad,
@@ -422,11 +387,8 @@ export default {
       eyebrow,
       headline,
       imprintUrl: computed(() => text(content.value.imprintUrl)),
-      introText,
-      introTitle,
       loadVideo,
       locationDisplay,
-      logoSrc,
       mainBenefit,
       mainBenefitHtml,
       presentationButtonLabel: computed(() => text(content.value.presentationButtonLabel) || 'Klingt gut! 👍🏼'),
@@ -437,8 +399,6 @@ export default {
       privacyUrl: computed(() => text(content.value.privacyUrl)),
       rootStyle,
       showFooter,
-      showIntro,
-      showLogo,
       startButtonLabel: computed(() => text(content.value.startButtonLabel) || 'Jetzt bewerben'),
       startButtonSubline: computed(() => text(content.value.startButtonSubline) || 'in 30 Sek. ohne Lebenslauf & Anschreiben'),
       tasks,
@@ -478,76 +438,13 @@ export default {
   box-sizing: border-box;
 }
 
-.quiz-landing__header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.quiz-landing__logo {
-  display: block;
-  width: min(100%, 420px);
-  max-height: 70px;
-  object-fit: contain;
-}
-
-.quiz-landing__intro {
-  margin-bottom: 26px;
-}
-
-.quiz-landing__line {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  min-height: 38px;
-  margin-bottom: 10px;
-}
-
-.quiz-landing__line::before {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--quiz-primary);
-  content: "";
-}
-
-.quiz-landing__avatar {
-  position: relative;
-  z-index: 1;
-  display: block;
-  width: 58px;
-  height: 58px;
-  border: 3px solid var(--quiz-primary);
-  border-radius: 999px;
-  object-fit: cover;
-  background: #ffffff;
-}
-
-.quiz-landing__intro-title,
 .quiz-block__headline,
 .quiz-block__section-title,
 .quiz-block__plain,
 .quiz-list,
-.quiz-landing__intro-text,
 .quiz-block__section-subtitle {
   margin: 0;
   letter-spacing: 0;
-}
-
-.quiz-landing__intro-title {
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.15;
-}
-
-.quiz-landing__intro-text {
-  max-width: 560px;
-  margin: 12px auto 0;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.25;
 }
 
 .quiz-block {
@@ -804,10 +701,6 @@ export default {
     padding: 14px 12px 26px;
   }
 
-  .quiz-landing__logo {
-    max-height: 56px;
-  }
-
   .quiz-block {
     margin-top: 22px;
   }
@@ -819,14 +712,6 @@ export default {
   .quiz-landing__button {
     min-height: 70px;
     font-size: 22px;
-  }
-
-  .quiz-landing__intro-title {
-    font-size: 22px;
-  }
-
-  .quiz-landing__intro-text {
-    font-size: 15px;
   }
 
   .quiz-block__headline {

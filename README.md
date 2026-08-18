@@ -17,8 +17,6 @@ Bind `quiz` to the quiz record from Xano. The component reads:
 - `positionInfos.top_benefits`
 - `images`
 - `images_optimized`
-- `company.logo` / `company.logo_optimized`
-- `contact`
 - `video_link`
 - `colour`
 
@@ -32,9 +30,11 @@ The component prefers `images_optimized` and falls back to the existing `images`
 - `image_benefit`: `images[3]`
 - `image_presentation`: `images[4]`
 - `image_task`: `images[5]`
-- `image_contactperson`: `images[6]`
+- `image_contactperson`: `images[6]`, currently not rendered by this component
 
 Empty image slots are not rendered.
+
+Logo and contact intro should be built with normal WeWeb containers outside this component.
 
 ## Events
 

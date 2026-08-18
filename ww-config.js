@@ -56,26 +56,8 @@ export default {
       bindable: true,
       defaultValue: null
     },
-    logoUrl: {
-      label: { en: 'Logo URL override' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: ''
-    },
     companyName: {
       label: { en: 'Company name override' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: ''
-    },
-    contactName: {
-      label: { en: 'Contact name fallback' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: 'Luisa'
-    },
-    contactImageUrl: {
-      label: { en: 'Contact image override' },
       type: 'Text',
       bindable: true,
       defaultValue: ''
@@ -88,18 +70,6 @@ export default {
     },
     eyebrow: {
       label: { en: 'Eyebrow' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: ''
-    },
-    introTitle: {
-      label: { en: 'Intro title override' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: ''
-    },
-    introText: {
-      label: { en: 'Intro text override' },
       type: 'Text',
       bindable: true,
       defaultValue: ''
@@ -211,18 +181,6 @@ export default {
       type: 'Text',
       bindable: true,
       defaultValue: ''
-    },
-    showLogo: {
-      label: { en: 'Show logo' },
-      type: 'Boolean',
-      bindable: true,
-      defaultValue: true
-    },
-    showIntro: {
-      label: { en: 'Show intro' },
-      type: 'Boolean',
-      bindable: true,
-      defaultValue: true
     },
     showFooter: {
       label: { en: 'Show footer' },
