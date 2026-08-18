@@ -125,11 +125,6 @@
         </button>
       </section>
     </template>
-
-    <footer v-if="showFooter" class="quiz-landing__footer">
-      <a v-if="imprintUrl" :href="imprintUrl" @click="emitLink('imprint')">Impressum</a>
-      <a v-if="privacyUrl" :href="privacyUrl" @click="emitLink('privacy')">Datenschutzerklärung</a>
-    </footer>
   </main>
 </template>
 
@@ -301,10 +296,17 @@ export default {
       '--quiz-button-width': cssLength(content.value.buttonWidth, '315px'),
       '--quiz-button-height': cssLength(content.value.buttonHeight, '72px'),
       '--quiz-radius': `${numberOrFallback(content.value.borderRadius, 8)}px`,
-      '--quiz-font': content.value.fontFamily || 'Inter, system-ui, sans-serif'
+      '--quiz-font': content.value.fontFamily || 'Inter, system-ui, sans-serif',
+      '--quiz-heading-font': content.value.headingFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
+      '--quiz-heading-size': `${numberOrFallback(content.value.headingFontSize, 26)}px`,
+      '--quiz-heading-weight': numberOrFallback(content.value.headingFontWeight, 700),
+      '--quiz-section-title-size': `${numberOrFallback(content.value.sectionTitleFontSize, 32)}px`,
+      '--quiz-button-font': content.value.buttonFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
+      '--quiz-button-size': `${numberOrFallback(content.value.buttonFontSize, 20)}px`,
+      '--quiz-button-weight': numberOrFallback(content.value.buttonFontWeight, 700),
+      '--quiz-button-subline-size': `${numberOrFallback(content.value.buttonSublineFontSize, 14)}px`,
+      '--quiz-button-subline-weight': numberOrFallback(content.value.buttonSublineFontWeight, 400)
     }));
-
-    const showFooter = computed(() => content.value.showFooter !== false);
 
     function emitAction(action) {
       emit('trigger-event', {
@@ -313,16 +315,6 @@ export default {
           action,
           quizId: quiz.value.id || null,
           quiz: quiz.value
-        }
-      });
-    }
-
-    function emitLink(link) {
-      emit('trigger-event', {
-        name: 'link',
-        event: {
-          link,
-          quizId: quiz.value.id || null
         }
       });
     }
@@ -360,10 +352,8 @@ export default {
       emitAction,
       emitImageError,
       emitImageLoad,
-      emitLink,
       eyebrow,
       headline,
-      imprintUrl: computed(() => text(content.value.imprintUrl)),
       locationDisplay,
       mainBenefit,
       mainBenefitHtml,
@@ -373,9 +363,7 @@ export default {
       presentationItems,
       presentationSubtitle: computed(() => text(content.value.presentationSubtitle) || `Hi, wir sind ${companyName.value}!`),
       presentationTitle: computed(() => text(content.value.presentationTitle) || 'Passen wir zusammen?'),
-      privacyUrl: computed(() => text(content.value.privacyUrl)),
       rootStyle,
-      showFooter,
       startButtonLabel: computed(() => text(content.value.startButtonLabel) || 'Jetzt bewerben'),
       startButtonSubline: computed(() => text(content.value.startButtonSubline) || 'in 30 Sek. ohne Lebenslauf & Anschreiben'),
       tasks,
@@ -443,8 +431,9 @@ export default {
 }
 
 .quiz-block__headline {
-  font-size: 26px;
-  font-weight: 700;
+  font-family: var(--quiz-heading-font);
+  font-size: var(--quiz-heading-size);
+  font-weight: var(--quiz-heading-weight);
   line-height: 1.14;
 }
 
@@ -469,9 +458,9 @@ export default {
   border-radius: var(--quiz-radius);
   background: var(--quiz-primary);
   color: #ffffff;
-  font: inherit;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--quiz-button-font);
+  font-size: var(--quiz-button-size);
+  font-weight: var(--quiz-button-weight);
   line-height: 1.1;
   cursor: pointer;
   box-shadow: 0 14px 30px color-mix(in srgb, var(--quiz-primary) 18%, transparent);
@@ -479,8 +468,8 @@ export default {
 
 .quiz-landing__button small {
   margin-top: 8px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--quiz-button-subline-size);
+  font-weight: var(--quiz-button-subline-weight);
 }
 
 .quiz-landing__button--small-first {
@@ -499,8 +488,8 @@ export default {
 .quiz-landing__button--secondary {
   min-height: calc(var(--quiz-button-height) - 6px);
   margin-top: 34px;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--quiz-button-size);
+  font-weight: var(--quiz-button-weight);
 }
 
 .quiz-landing__button--secondary small {
@@ -581,8 +570,9 @@ export default {
 
 .quiz-block__section-title {
   max-width: var(--quiz-content-width);
-  font-size: 32px;
-  font-weight: 700;
+  font-family: var(--quiz-heading-font);
+  font-size: var(--quiz-section-title-size);
+  font-weight: var(--quiz-heading-weight);
   line-height: 1.08;
 }
 
@@ -654,24 +644,6 @@ export default {
   margin-top: 42px;
 }
 
-.quiz-landing__footer {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 58px;
-  color: var(--quiz-muted);
-  font-size: 13px;
-}
-
-.quiz-landing__footer a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.quiz-landing__footer a:hover {
-  color: var(--quiz-primary);
-}
-
 @media (max-width: 560px) {
   .quiz-landing {
     padding: 20px 12px 34px;
@@ -699,23 +671,14 @@ export default {
   }
 
   .quiz-landing__button {
-    font-size: 20px;
   }
 
   .quiz-landing__button--secondary {
     margin-top: 32px;
   }
 
-  .quiz-block__headline {
-    font-size: 23px;
-  }
-
   .quiz-block__main-benefit {
     font-size: 17px;
-  }
-
-  .quiz-block__section-title {
-    font-size: 28px;
   }
 
   .quiz-block__section-subtitle {

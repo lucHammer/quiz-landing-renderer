@@ -17,14 +17,6 @@ export default {
       }
     },
     {
-      name: 'link',
-      label: { en: 'Footer link clicked' },
-      event: {
-        link: '',
-        quizId: null
-      }
-    },
-    {
       name: 'image-load',
       label: { en: 'Image loaded' },
       event: {
@@ -182,24 +174,6 @@ export default {
       bindable: true,
       defaultValue: ''
     },
-    imprintUrl: {
-      label: { en: 'Imprint URL' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: ''
-    },
-    privacyUrl: {
-      label: { en: 'Privacy URL' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: ''
-    },
-    showFooter: {
-      label: { en: 'Show footer' },
-      type: 'Boolean',
-      bindable: true,
-      defaultValue: true
-    },
     primaryColor: {
       label: { en: 'Primary color' },
       type: 'Color',
@@ -247,6 +221,67 @@ export default {
       type: 'Text',
       bindable: true,
       defaultValue: '72px'
+    },
+    headingFontFamily: {
+      label: { en: 'Heading font family' },
+      type: 'FontFamily',
+      bindable: true,
+      defaultValue: 'Inter'
+    },
+    headingFontSize: {
+      label: { en: 'Heading font size' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 26,
+      options: { min: 10, max: 72, step: 1 }
+    },
+    sectionTitleFontSize: {
+      label: { en: 'Section title font size' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 32,
+      options: { min: 10, max: 72, step: 1 }
+    },
+    headingFontWeight: {
+      label: { en: 'Heading font weight' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 700,
+      options: { min: 100, max: 1000, step: 100 }
+    },
+    buttonFontFamily: {
+      label: { en: 'Button font family' },
+      type: 'FontFamily',
+      bindable: true,
+      defaultValue: 'Inter'
+    },
+    buttonFontSize: {
+      label: { en: 'Button font size' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 20,
+      options: { min: 10, max: 48, step: 1 }
+    },
+    buttonFontWeight: {
+      label: { en: 'Button font weight' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 700,
+      options: { min: 100, max: 1000, step: 100 }
+    },
+    buttonSublineFontSize: {
+      label: { en: 'Button subline font size' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 14,
+      options: { min: 8, max: 32, step: 1 }
+    },
+    buttonSublineFontWeight: {
+      label: { en: 'Button subline font weight' },
+      type: 'Number',
+      bindable: true,
+      defaultValue: 400,
+      options: { min: 100, max: 1000, step: 100 }
     },
     borderRadius: {
       label: { en: 'Border radius' },

@@ -37,7 +37,6 @@ Logo and contact intro should be built with normal WeWeb containers outside this
 ## Events
 
 - `action`: fired by CTA buttons. `event.action` is `start`, `benefits`, `presentation`, `tasks`, or `video`.
-- `link`: fired by footer links.
 - `image-load`
 - `image-error`
 
