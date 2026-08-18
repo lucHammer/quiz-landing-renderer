@@ -120,6 +120,12 @@ export default {
       label: { en: 'Benefits button label' },
       type: 'Text',
       bindable: true,
+      defaultValue: 'Passen wir zusammen?'
+    },
+    benefitsButtonSubline: {
+      label: { en: 'Benefits button subline' },
+      type: 'Text',
+      bindable: true,
       defaultValue: 'Ja, die Vorteile will ich!'
     },
     presentationTitle: {
@@ -140,6 +146,12 @@ export default {
       bindable: true,
       defaultValue: 'Klingt gut! 👍🏼'
     },
+    presentationButtonSubline: {
+      label: { en: 'Presentation button subline' },
+      type: 'Text',
+      bindable: true,
+      defaultValue: 'Passen wir zusammen?'
+    },
     tasksTitle: {
       label: { en: 'Tasks title' },
       type: 'Text',
@@ -154,6 +166,12 @@ export default {
     },
     tasksButtonLabel: {
       label: { en: 'Tasks button label' },
+      type: 'Text',
+      bindable: true,
+      defaultValue: 'Zum nächsten Schritt!'
+    },
+    tasksButtonSubline: {
+      label: { en: 'Tasks button subline' },
       type: 'Text',
       bindable: true,
       defaultValue: 'Die Aufgaben finde ich gut!'

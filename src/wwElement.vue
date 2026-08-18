@@ -90,8 +90,13 @@
             <span>{{ entry.text }}</span>
           </li>
         </ul>
-        <button class="quiz-landing__button quiz-landing__button--secondary" type="button" @click="emitAction('benefits')">
-          {{ benefitsButtonLabel }}
+        <button
+          class="quiz-landing__button quiz-landing__button--secondary quiz-landing__button--small-first"
+          type="button"
+          @click="emitAction('benefits')"
+        >
+          <small>{{ benefitsButtonSubline }}</small>
+          <span>{{ benefitsButtonLabel }}</span>
         </button>
       </section>
 
@@ -115,7 +120,8 @@
           </article>
         </div>
         <button class="quiz-landing__button quiz-landing__button--secondary" type="button" @click="emitAction('presentation')">
-          {{ presentationButtonLabel }}
+          <span>{{ presentationButtonLabel }}</span>
+          <small>{{ presentationButtonSubline }}</small>
         </button>
       </section>
 
@@ -138,8 +144,13 @@
             <span>{{ entry.text }}</span>
           </li>
         </ul>
-        <button class="quiz-landing__button quiz-landing__button--secondary" type="button" @click="emitAction('tasks')">
-          {{ tasksButtonLabel }}
+        <button
+          class="quiz-landing__button quiz-landing__button--secondary quiz-landing__button--small-first"
+          type="button"
+          @click="emitAction('tasks')"
+        >
+          <small>{{ tasksButtonSubline }}</small>
+          <span>{{ tasksButtonLabel }}</span>
         </button>
       </section>
     </template>
@@ -374,7 +385,8 @@ export default {
 
     return {
       benefits,
-      benefitsButtonLabel: computed(() => text(content.value.benefitsButtonLabel) || 'Ja, die Vorteile will ich!'),
+      benefitsButtonLabel: computed(() => text(content.value.benefitsButtonLabel) || 'Passen wir zusammen?'),
+      benefitsButtonSubline: computed(() => text(content.value.benefitsButtonSubline) || 'Ja, die Vorteile will ich!'),
       benefitsSubtitle: computed(() => text(content.value.benefitsSubtitle) || 'Erhalten Sie Vorteile, die Sie verdienen:'),
       benefitsTitle: computed(() => text(content.value.benefitsTitle) || 'Top-Arbeitsbedingungen? Bei uns garantiert!'),
       buttonLeftSrc,
@@ -392,6 +404,7 @@ export default {
       mainBenefit,
       mainBenefitHtml,
       presentationButtonLabel: computed(() => text(content.value.presentationButtonLabel) || 'Klingt gut! 👍🏼'),
+      presentationButtonSubline: computed(() => text(content.value.presentationButtonSubline) || 'Passen wir zusammen?'),
       presentationImageSrc,
       presentationItems,
       presentationSubtitle: computed(() => text(content.value.presentationSubtitle) || `Hi, wir sind ${companyName.value}!`),
@@ -402,7 +415,8 @@ export default {
       startButtonLabel: computed(() => text(content.value.startButtonLabel) || 'Jetzt bewerben'),
       startButtonSubline: computed(() => text(content.value.startButtonSubline) || 'in 30 Sek. ohne Lebenslauf & Anschreiben'),
       tasks,
-      tasksButtonLabel: computed(() => text(content.value.tasksButtonLabel) || 'Die Aufgaben finde ich gut!'),
+      tasksButtonLabel: computed(() => text(content.value.tasksButtonLabel) || 'Zum nächsten Schritt!'),
+      tasksButtonSubline: computed(() => text(content.value.tasksButtonSubline) || 'Die Aufgaben finde ich gut!'),
       tasksImageSrc,
       tasksSubtitle: computed(() => text(content.value.tasksSubtitle) || 'Ihr spannender Alltag beinhaltet:'),
       tasksTitle: computed(() => text(content.value.tasksTitle) || 'Langweilige Aufgaben? Nicht bei uns!'),
@@ -425,7 +439,7 @@ export default {
   width: 100%;
   max-width: var(--quiz-max-width);
   margin: 0 auto;
-  padding: 18px 16px 32px;
+  padding: 24px 16px 42px;
   background: var(--quiz-background);
   color: var(--quiz-text);
   font-family: var(--quiz-font);
@@ -449,13 +463,14 @@ export default {
 
 .quiz-block {
   width: 100%;
-  margin-top: 24px;
+  margin-top: 34px;
 }
 
 .quiz-block--title {
   max-width: 560px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
 }
 
 .quiz-block__eyebrow {
@@ -477,7 +492,7 @@ export default {
   display: grid;
   justify-items: center;
   gap: 16px;
-  margin-top: 48px;
+  margin-top: 38px;
 }
 
 .quiz-block__button-images {
@@ -523,18 +538,36 @@ export default {
   font-weight: 400;
 }
 
+.quiz-landing__button--small-first {
+  gap: 5px;
+}
+
+.quiz-landing__button--small-first small {
+  order: 0;
+  margin-top: 0;
+}
+
+.quiz-landing__button--small-first span {
+  order: 1;
+}
+
 .quiz-landing__button--secondary {
   min-height: 58px;
-  margin-top: 24px;
+  margin-top: 34px;
   font-size: 18px;
   font-weight: 700;
+}
+
+.quiz-landing__button--secondary small {
+  margin-top: 6px;
+  font-size: 12px;
 }
 
 .quiz-block--compact {
   display: grid;
   justify-items: center;
   gap: 6px;
-  margin-top: 26px;
+  margin-top: 28px;
 }
 
 .quiz-block__icon {
@@ -575,7 +608,7 @@ export default {
 .quiz-block--media {
   display: grid;
   justify-items: center;
-  margin-top: 30px;
+  margin-top: 44px;
 }
 
 .quiz-block__image {
@@ -631,6 +664,7 @@ export default {
 .quiz-block--presentation {
   display: grid;
   justify-items: center;
+  margin-top: 58px;
 }
 
 .quiz-block__section-title {
@@ -642,7 +676,7 @@ export default {
 
 .quiz-block__section-subtitle {
   max-width: 520px;
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.3;
@@ -650,7 +684,13 @@ export default {
 
 .quiz-block--list .quiz-list {
   width: min(100%, 560px);
-  margin-top: 24px;
+  margin-top: 42px;
+  gap: 32px;
+}
+
+.quiz-block--presentation .quiz-block__image + .quiz-block__section-title,
+.quiz-block--list .quiz-block__image + .quiz-block__section-title {
+  margin-top: 34px;
 }
 
 .quiz-list__item,
@@ -658,7 +698,7 @@ export default {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   text-align: left;
 }
 
@@ -673,9 +713,9 @@ export default {
 
 .quiz-rich-list {
   display: grid;
-  gap: 16px;
+  gap: 34px;
   width: min(100%, 560px);
-  margin-top: 24px;
+  margin-top: 42px;
 }
 
 .quiz-rich-list__item :deep(p) {
@@ -686,7 +726,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 36px;
+  margin-top: 58px;
   color: var(--quiz-muted);
   font-size: 13px;
 }
@@ -702,11 +742,28 @@ export default {
 
 @media (max-width: 560px) {
   .quiz-landing {
-    padding: 14px 12px 26px;
+    padding: 20px 12px 34px;
   }
 
   .quiz-block {
-    margin-top: 22px;
+    margin-top: 30px;
+  }
+
+  .quiz-block--title {
+    margin-top: 0;
+  }
+
+  .quiz-block--cta {
+    margin-top: 36px;
+  }
+
+  .quiz-block--media {
+    margin-top: 40px;
+  }
+
+  .quiz-block--list,
+  .quiz-block--presentation {
+    margin-top: 52px;
   }
 
   .quiz-block__button-images {
@@ -716,6 +773,11 @@ export default {
   .quiz-landing__button {
     min-height: 86px;
     font-size: 20px;
+  }
+
+  .quiz-landing__button--secondary {
+    min-height: 58px;
+    margin-top: 32px;
   }
 
   .quiz-block__headline {
@@ -732,6 +794,15 @@ export default {
 
   .quiz-block__section-subtitle {
     font-size: 16px;
+  }
+
+  .quiz-block--list .quiz-list,
+  .quiz-rich-list {
+    margin-top: 36px;
+  }
+
+  .quiz-block--list .quiz-list {
+    gap: 28px;
   }
 }
 </style>
