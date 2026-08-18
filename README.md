@@ -24,8 +24,6 @@ Bind `quiz` to the quiz record from Xano. The component reads:
 
 The component prefers `images_optimized` and falls back to the existing `images` array:
 
-- `button_left`: `images[0]`
-- `button_right`: `images[1]`
 - `teamphoto`: `images[2]`
 - `image_benefit`: `images[3]`
 - `image_presentation`: `images[4]`

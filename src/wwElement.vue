@@ -7,24 +7,6 @@
       </section>
 
       <section v-else-if="item.type === 'buttons'" class="quiz-block quiz-block--cta">
-        <div v-if="buttonLeftSrc || buttonRightSrc" class="quiz-block__button-images">
-          <img
-            v-if="buttonLeftSrc"
-            class="quiz-block__button-image"
-            :src="buttonLeftSrc"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          >
-          <img
-            v-if="buttonRightSrc"
-            class="quiz-block__button-image"
-            :src="buttonRightSrc"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          >
-        </div>
         <button class="quiz-landing__button" type="button" @click="emitAction('start')">
           <span>{{ startButtonLabel }}</span>
           <small>{{ startButtonSubline }}</small>
@@ -179,8 +161,6 @@ const DEFAULT_ORDER = [
 ];
 
 const IMAGE_KEYS = {
-  button_left: 0,
-  button_right: 1,
   teamphoto: 2,
   image_benefit: 3,
   image_presentation: 4,
@@ -318,8 +298,6 @@ export default {
     const tasks = computed(() => normalizeList(quiz.value.tasks));
     const presentationItems = computed(() => normalizeList(quiz.value.company_presentation));
 
-    const buttonLeftSrc = computed(() => imageByKey('button_left'));
-    const buttonRightSrc = computed(() => imageByKey('button_right'));
     const teamphotoSrc = computed(() => imageByKey('teamphoto'));
     const presentationImageSrc = computed(() => imageByKey('image_presentation'));
     const tasksImageSrc = computed(() => imageByKey('image_task'));
@@ -400,8 +378,6 @@ export default {
       benefitsButtonSubline: computed(() => text(content.value.benefitsButtonSubline) || 'Ja, die Vorteile will ich!'),
       benefitsSubtitle: computed(() => text(content.value.benefitsSubtitle) || 'Erhalten Sie Vorteile, die Sie verdienen:'),
       benefitsTitle: computed(() => text(content.value.benefitsTitle) || 'Top-Arbeitsbedingungen? Bei uns garantiert!'),
-      buttonLeftSrc,
-      buttonRightSrc,
       companyName,
       emitAction,
       emitImageError,
@@ -504,21 +480,6 @@ export default {
   justify-items: center;
   gap: 16px;
   margin-top: 38px;
-}
-
-.quiz-block__button-images {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  width: min(100%, var(--quiz-content-width));
-}
-
-.quiz-block__button-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--quiz-radius);
-  object-fit: cover;
 }
 
 .quiz-landing__button {
@@ -795,10 +756,6 @@ export default {
   .quiz-block--list,
   .quiz-block--presentation {
     margin-top: 52px;
-  }
-
-  .quiz-block__button-images {
-    grid-template-columns: 1fr;
   }
 
   .quiz-landing__button {
