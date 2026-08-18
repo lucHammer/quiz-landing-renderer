@@ -297,7 +297,6 @@ export default {
       '--quiz-text': content.value.textColor || '#050505',
       '--quiz-muted': content.value.mutedColor || '#667085',
       '--quiz-border': content.value.borderColor || '#d8e0ea',
-      '--quiz-max-width': cssLength(content.value.maxWidth, '860px'),
       '--quiz-content-width': cssLength(content.value.contentWidth, '550px'),
       '--quiz-button-width': cssLength(content.value.buttonWidth, '315px'),
       '--quiz-button-height': cssLength(content.value.buttonHeight, '72px'),
@@ -399,7 +398,6 @@ export default {
 .quiz-landing {
   box-sizing: border-box;
   width: 100%;
-  max-width: var(--quiz-max-width);
   margin: 0 auto;
   padding: 24px 16px 42px;
   background: var(--quiz-background);

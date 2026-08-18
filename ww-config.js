@@ -230,12 +230,6 @@ export default {
       bindable: true,
       defaultValue: '#d8e0ea'
     },
-    maxWidth: {
-      label: { en: 'Max width' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: '860px'
-    },
     contentWidth: {
       label: { en: 'Content width' },
       type: 'Text',
