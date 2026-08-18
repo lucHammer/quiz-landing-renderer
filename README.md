@@ -43,8 +43,20 @@ Logo and contact intro should be built with normal WeWeb containers outside this
 ## Headline logic
 
 The first headline uses `headline` override first. If that is empty, it uses `quiz.title`.
-If there is no quiz title and `quiz.options.azubi` is true, it renders `Du hast Lust {positionName} zu werden?`.
+If there is no quiz title and `quiz.options.azubi` is true, it renders either `Sie haben Lust {positionName} zu werden?` or `Du hast Lust {positionName} zu werden?`, depending on `quiz.options.du_sie`.
 Otherwise it renders `Neugierig, warum sich ein Wechsel als {positionName} lohnt?`.
+
+## Tone logic
+
+If `quiz.options.du_sie` is true, dynamic defaults use Sie form:
+
+- `Erhalten Sie Vorteile, die Sie verdienen:`
+- `Ihr spannender Alltag beinhaltet:`
+
+Otherwise they use Du form:
+
+- `Erhalte Vorteile, die Du verdienst:`
+- `Dein spannender Alltag beinhaltet:`
 
 ## Performance notes
 

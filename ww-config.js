@@ -106,7 +106,7 @@ export default {
       label: { en: 'Benefits subtitle' },
       type: 'Text',
       bindable: true,
-      defaultValue: 'Erhalten Sie Vorteile, die Sie verdienen:'
+      defaultValue: ''
     },
     benefitsButtonLabel: {
       label: { en: 'Benefits button label' },
@@ -148,7 +148,7 @@ export default {
       label: { en: 'Tasks subtitle' },
       type: 'Text',
       bindable: true,
-      defaultValue: 'Ihr spannender Alltag beinhaltet:'
+      defaultValue: ''
     },
     tasksButtonLabel: {
       label: { en: 'Tasks button label' },

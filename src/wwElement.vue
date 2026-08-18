@@ -168,6 +168,12 @@ function cssLength(value, fallback, unit = 'px') {
   return clean;
 }
 
+function customTextOrEmpty(value, dynamicDefaults = []) {
+  const clean = text(value);
+  if (!clean) return '';
+  return dynamicDefaults.includes(clean) ? '' : clean;
+}
+
 function parseMaybeJson(value, fallback) {
   if (Array.isArray(value) || (value && typeof value === 'object')) return value;
   if (typeof value !== 'string' || !value.trim()) return fallback;
@@ -265,6 +271,7 @@ export default {
 
     const companyName = computed(() => text(content.value.companyName) || text(quiz.value.company?.company_display_name) || text(quiz.value.company?.companyName) || 'Hammerjobs');
     const options = computed(() => parseMaybeJson(quiz.value.options, {}) || {});
+    const usesFormalTone = computed(() => options.value?.du_sie === true);
     const headline = computed(() => {
       const customHeadline = text(content.value.headline);
       const quizTitle = text(quiz.value.title);
@@ -272,7 +279,11 @@ export default {
 
       if (customHeadline) return customHeadline;
       if (quizTitle) return quizTitle;
-      if (options.value?.azubi === true) return `Du hast Lust ${positionName} zu werden?`;
+      if (options.value?.azubi === true) {
+        return usesFormalTone.value
+          ? `Sie haben Lust ${positionName} zu werden?`
+          : `Du hast Lust ${positionName} zu werden?`;
+      }
       return `Neugierig, warum sich ein Wechsel als ${positionName} lohnt?`;
     });
     const eyebrow = computed(() => text(content.value.eyebrow));
@@ -358,7 +369,11 @@ export default {
       benefits,
       benefitsButtonLabel: computed(() => text(content.value.benefitsButtonLabel) || 'Passen wir zusammen?'),
       benefitsButtonSubline: computed(() => text(content.value.benefitsButtonSubline) || 'Ja, die Vorteile will ich!'),
-      benefitsSubtitle: computed(() => text(content.value.benefitsSubtitle) || 'Erhalten Sie Vorteile, die Sie verdienen:'),
+      benefitsSubtitle: computed(() => customTextOrEmpty(content.value.benefitsSubtitle, [
+        'Erhalten Sie Vorteile, die Sie verdienen:',
+        'Erhalte Vorteile, die Du verdienst:',
+        'Erhalte Vorteile, die du verdienst:'
+      ]) || (usesFormalTone.value ? 'Erhalten Sie Vorteile, die Sie verdienen:' : 'Erhalte Vorteile, die Du verdienst:')),
       benefitsTitle: computed(() => text(content.value.benefitsTitle) || 'Top-Arbeitsbedingungen? Bei uns garantiert!'),
       companyName,
       emitAction,
@@ -387,7 +402,10 @@ export default {
       tasksButtonLabel: computed(() => text(content.value.tasksButtonLabel) || 'Zum nächsten Schritt!'),
       tasksButtonSubline: computed(() => text(content.value.tasksButtonSubline) || 'Die Aufgaben finde ich gut!'),
       tasksImageSrc,
-      tasksSubtitle: computed(() => text(content.value.tasksSubtitle) || 'Ihr spannender Alltag beinhaltet:'),
+      tasksSubtitle: computed(() => customTextOrEmpty(content.value.tasksSubtitle, [
+        'Ihr spannender Alltag beinhaltet:',
+        'Dein spannender Alltag beinhaltet:'
+      ]) || (usesFormalTone.value ? 'Ihr spannender Alltag beinhaltet:' : 'Dein spannender Alltag beinhaltet:')),
       tasksTitle: computed(() => text(content.value.tasksTitle) || 'Langweilige Aufgaben? Nicht bei uns!'),
       teamphotoAlt: computed(() => text(content.value.teamphotoAlt) || companyName.value),
       teamphotoSrc,
