@@ -121,13 +121,7 @@ export default {
       defaultValue: 'Ja, die Vorteile will ich!'
     },
     presentationTitle: {
-      label: { en: 'Presentation title' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: 'Passen wir zusammen?'
-    },
-    presentationSubtitle: {
-      label: { en: 'Presentation subtitle override' },
+      label: { en: 'Presentation heading' },
       type: 'Text',
       bindable: true,
       defaultValue: ''
@@ -233,13 +227,6 @@ export default {
       type: 'Number',
       bindable: true,
       defaultValue: 26,
-      options: { min: 10, max: 72, step: 1 }
-    },
-    sectionTitleFontSize: {
-      label: { en: 'Section title font size' },
-      type: 'Number',
-      bindable: true,
-      defaultValue: 32,
       options: { min: 10, max: 72, step: 1 }
     },
     headingFontWeight: {

@@ -40,6 +40,12 @@ Logo and contact intro should be built with normal WeWeb containers outside this
 - `image-load`
 - `image-error`
 
+## Headline logic
+
+The first headline uses `headline` override first. If that is empty, it uses `quiz.title`.
+If there is no quiz title and `quiz.options.azubi` is true, it renders `Du hast Lust {positionName} zu werden?`.
+Otherwise it renders `Neugierig, warum sich ein Wechsel als {positionName} lohnt?`.
+
 ## Performance notes
 
 - Only visible `quiz_order` items are rendered.

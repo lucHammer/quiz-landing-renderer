@@ -82,8 +82,7 @@
           @load="emitImageLoad('presentation', $event)"
           @error="emitImageError('presentation')"
         >
-        <h2 class="quiz-block__section-title">{{ presentationTitle }}</h2>
-        <p class="quiz-block__section-subtitle">{{ presentationSubtitle }}</p>
+        <h2 class="quiz-block__section-title">{{ presentationHeading }}</h2>
         <div v-if="presentationItems.length" class="quiz-rich-list">
           <article v-for="entry in presentationItems" :key="entry.text" class="quiz-rich-list__item">
             <span class="quiz-list__emoji" aria-hidden="true">{{ entry.emoji }}</span>
@@ -265,7 +264,17 @@ export default {
     }
 
     const companyName = computed(() => text(content.value.companyName) || text(quiz.value.company?.company_display_name) || text(quiz.value.company?.companyName) || 'Hammerjobs');
-    const headline = computed(() => text(content.value.headline) || `Neugierig, warum sich ein Wechsel als ${text(quiz.value.positionName) || 'dieser Job'} lohnt?`);
+    const options = computed(() => parseMaybeJson(quiz.value.options, {}) || {});
+    const headline = computed(() => {
+      const customHeadline = text(content.value.headline);
+      const quizTitle = text(quiz.value.title);
+      const positionName = text(quiz.value.positionName) || 'dieser Job';
+
+      if (customHeadline) return customHeadline;
+      if (quizTitle) return quizTitle;
+      if (options.value?.azubi === true) return `Du hast Lust ${positionName} zu werden?`;
+      return `Neugierig, warum sich ein Wechsel als ${positionName} lohnt?`;
+    });
     const eyebrow = computed(() => text(content.value.eyebrow));
     const locationDisplay = computed(() => text(content.value.locationDisplay) || text(quiz.value.location_display));
     const mainBenefit = computed(() => text(quiz.value.main_benefit));
@@ -300,7 +309,6 @@ export default {
       '--quiz-heading-font': content.value.headingFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
       '--quiz-heading-size': `${numberOrFallback(content.value.headingFontSize, 26)}px`,
       '--quiz-heading-weight': numberOrFallback(content.value.headingFontWeight, 700),
-      '--quiz-section-title-size': `${numberOrFallback(content.value.sectionTitleFontSize, 32)}px`,
       '--quiz-button-font': content.value.buttonFontFamily || content.value.fontFamily || 'Inter, system-ui, sans-serif',
       '--quiz-button-size': `${numberOrFallback(content.value.buttonFontSize, 20)}px`,
       '--quiz-button-weight': numberOrFallback(content.value.buttonFontWeight, 700),
@@ -361,8 +369,13 @@ export default {
       presentationButtonSubline: computed(() => text(content.value.presentationButtonSubline) || 'Passen wir zusammen?'),
       presentationImageSrc,
       presentationItems,
-      presentationSubtitle: computed(() => text(content.value.presentationSubtitle) || `Hi, wir sind ${companyName.value}!`),
-      presentationTitle: computed(() => text(content.value.presentationTitle) || 'Passen wir zusammen?'),
+      presentationHeading: computed(() => {
+        const configuredTitle = text(content.value.presentationTitle);
+        const legacySubtitle = text(content.value.presentationSubtitle);
+        if (configuredTitle && configuredTitle !== 'Passen wir zusammen?') return configuredTitle;
+        if (legacySubtitle && legacySubtitle !== 'Passen wir zusammen?') return legacySubtitle;
+        return `Hi, wir sind ${companyName.value}!`;
+      }),
       rootStyle,
       startButtonLabel: computed(() => text(content.value.startButtonLabel) || 'Jetzt bewerben'),
       startButtonSubline: computed(() => text(content.value.startButtonSubline) || 'in 30 Sek. ohne Lebenslauf & Anschreiben'),
@@ -571,7 +584,7 @@ export default {
 .quiz-block__section-title {
   max-width: var(--quiz-content-width);
   font-family: var(--quiz-heading-font);
-  font-size: var(--quiz-section-title-size);
+  font-size: var(--quiz-heading-size);
   font-weight: var(--quiz-heading-weight);
   line-height: 1.08;
 }
