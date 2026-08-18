@@ -176,12 +176,6 @@ export default {
       bindable: true,
       defaultValue: 'Die Aufgaben finde ich gut!'
     },
-    videoButtonLabel: {
-      label: { en: 'Video button label' },
-      type: 'Text',
-      bindable: true,
-      defaultValue: 'Video ansehen'
-    },
     teamphotoAlt: {
       label: { en: 'Team photo alt' },
       type: 'Text',
@@ -258,7 +252,7 @@ export default {
       label: { en: 'Button height' },
       type: 'Text',
       bindable: true,
-      defaultValue: '66px'
+      defaultValue: '72px'
     },
     borderRadius: {
       label: { en: 'Border radius' },

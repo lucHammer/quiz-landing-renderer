@@ -42,18 +42,7 @@
       </section>
 
       <section v-else-if="item.type === 'video' && videoEmbedUrl" class="quiz-block quiz-block--media">
-        <button
-          v-if="!videoLoaded"
-          class="quiz-video"
-          type="button"
-          :style="videoPosterStyle"
-          @click="loadVideo"
-        >
-          <span class="quiz-video__play" aria-hidden="true">▶</span>
-          <span class="quiz-video__label">{{ videoButtonLabel }}</span>
-        </button>
         <iframe
-          v-else
           class="quiz-video__frame"
           :src="videoEmbedUrl"
           title="Video"
@@ -145,7 +134,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 const DEFAULT_ORDER = [
   { type: 'title', visible: true },
@@ -267,7 +256,6 @@ export default {
   },
   emits: ['trigger-event'],
   setup(props, { emit }) {
-    const videoLoaded = ref(false);
     const content = computed(() => props.content || {});
     const quiz = computed(() => parseMaybeJson(content.value.quiz, {}) || {});
 
@@ -303,10 +291,6 @@ export default {
     const tasksImageSrc = computed(() => imageByKey('image_task'));
 
     const videoEmbedUrl = computed(() => youtubeEmbedUrl(quiz.value.video_link || content.value.videoUrl));
-    const videoPosterStyle = computed(() => ({
-      '--quiz-video-poster': teamphotoSrc.value ? `url("${teamphotoSrc.value}")` : 'none'
-    }));
-
     const rootStyle = computed(() => ({
       '--quiz-primary': content.value.primaryColor || quiz.value.colour || '#034689',
       '--quiz-background': content.value.backgroundColor || '#ffffff',
@@ -316,7 +300,7 @@ export default {
       '--quiz-max-width': cssLength(content.value.maxWidth, '860px'),
       '--quiz-content-width': cssLength(content.value.contentWidth, '550px'),
       '--quiz-button-width': cssLength(content.value.buttonWidth, '315px'),
-      '--quiz-button-height': cssLength(content.value.buttonHeight, '66px'),
+      '--quiz-button-height': cssLength(content.value.buttonHeight, '72px'),
       '--quiz-radius': `${numberOrFallback(content.value.borderRadius, 8)}px`,
       '--quiz-font': content.value.fontFamily || 'Inter, system-ui, sans-serif'
     }));
@@ -367,11 +351,6 @@ export default {
       });
     }
 
-    function loadVideo() {
-      videoLoaded.value = true;
-      emitAction('video');
-    }
-
     return {
       benefits,
       benefitsButtonLabel: computed(() => text(content.value.benefitsButtonLabel) || 'Passen wir zusammen?'),
@@ -386,7 +365,6 @@ export default {
       eyebrow,
       headline,
       imprintUrl: computed(() => text(content.value.imprintUrl)),
-      loadVideo,
       locationDisplay,
       mainBenefit,
       mainBenefitHtml,
@@ -410,10 +388,7 @@ export default {
       teamphotoAlt: computed(() => text(content.value.teamphotoAlt) || companyName.value),
       teamphotoSrc,
       topBenefits,
-      videoButtonLabel: computed(() => text(content.value.videoButtonLabel) || 'Video ansehen'),
       videoEmbedUrl,
-      videoLoaded,
-      videoPosterStyle,
       visibleItems
     };
   }
@@ -491,7 +466,7 @@ export default {
   justify-content: center;
   width: min(100%, var(--quiz-button-width));
   min-height: var(--quiz-button-height);
-  padding: 12px 22px;
+  padding: 16px 28px;
   border: 0;
   border-radius: var(--quiz-radius);
   background: var(--quiz-primary);
@@ -524,7 +499,7 @@ export default {
 }
 
 .quiz-landing__button--secondary {
-  min-height: 58px;
+  min-height: calc(var(--quiz-button-height) - 6px);
   margin-top: 34px;
   font-size: 18px;
   font-weight: 700;
@@ -591,45 +566,12 @@ export default {
   object-fit: cover;
 }
 
-.quiz-video,
 .quiz-video__frame {
   width: min(100%, var(--quiz-content-width));
   aspect-ratio: 16 / 9;
   border: 0;
   border-radius: var(--quiz-radius);
   overflow: hidden;
-}
-
-.quiz-video {
-  position: relative;
-  display: grid;
-  place-items: center;
-  background-color: color-mix(in srgb, var(--quiz-primary) 78%, #111827);
-  background-image: linear-gradient(rgba(3, 70, 137, 0.18), rgba(3, 70, 137, 0.18)), var(--quiz-video-poster);
-  background-position: center;
-  background-size: cover;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.quiz-video__play {
-  display: grid;
-  place-items: center;
-  width: 76px;
-  height: 76px;
-  padding-left: 4px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
-  font-size: 36px;
-  line-height: 1;
-}
-
-.quiz-video__label {
-  position: absolute;
-  left: 18px;
-  bottom: 16px;
-  font-size: 16px;
-  font-weight: 700;
 }
 
 .quiz-block--list,
