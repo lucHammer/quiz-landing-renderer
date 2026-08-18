@@ -616,7 +616,7 @@ export default {
 .quiz-rich-list__item {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
-  align-items: center;
+  align-items: start;
   gap: 16px;
   text-align: left;
 }
@@ -626,6 +626,7 @@ export default {
   place-items: center;
   width: 44px;
   height: 44px;
+  padding-top: 1px;
   font-size: 28px;
   line-height: 1;
 }
