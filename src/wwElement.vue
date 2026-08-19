@@ -199,6 +199,13 @@ function sanitizeHtml(value) {
     .replace(/javascript:/gi, '');
 }
 
+function normalizeHeadlineHtml(value) {
+  return sanitizeHtml(value)
+    .replace(/<small(\s[^>]*)?>/gi, '<span class="quiz-headline-small" style="font-size:0.72em;font-weight:inherit;line-height:inherit;">')
+    .replace(/<\/small>/gi, '</span>')
+    .replace(/\n/g, '<br>');
+}
+
 function normalizeList(value) {
   const list = parseMaybeJson(value, []);
   if (!Array.isArray(list)) return [];
@@ -286,7 +293,7 @@ export default {
       }
       return `Neugierig, warum sich ein Wechsel als ${positionName} lohnt?`;
     });
-    const headlineHtml = computed(() => sanitizeHtml(headline.value).replace(/\n/g, '<br>'));
+    const headlineHtml = computed(() => normalizeHeadlineHtml(headline.value));
     const eyebrow = computed(() => text(content.value.eyebrow));
     const locationDisplay = computed(() => text(content.value.locationDisplay) || text(quiz.value.location_display));
     const mainBenefit = computed(() => text(quiz.value.main_benefit));
@@ -474,7 +481,8 @@ export default {
   line-height: 1.14;
 }
 
-.quiz-block__headline :deep(small) {
+.quiz-block__headline :deep(small),
+.quiz-block__headline :deep(.quiz-headline-small) {
   font-size: 0.72em;
   font-weight: inherit;
   line-height: inherit;
