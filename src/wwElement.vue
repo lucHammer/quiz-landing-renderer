@@ -3,7 +3,7 @@
     <template v-for="item in visibleItems" :key="item.key">
       <section v-if="item.type === 'title'" class="quiz-block quiz-block--title">
         <p v-if="eyebrow" class="quiz-block__eyebrow">{{ eyebrow }}</p>
-        <h1 class="quiz-block__headline">{{ headline }}</h1>
+        <h1 class="quiz-block__headline" v-html="headlineHtml"></h1>
       </section>
 
       <section v-else-if="item.type === 'buttons'" class="quiz-block quiz-block--cta">
@@ -286,6 +286,7 @@ export default {
       }
       return `Neugierig, warum sich ein Wechsel als ${positionName} lohnt?`;
     });
+    const headlineHtml = computed(() => sanitizeHtml(headline.value).replace(/\n/g, '<br>'));
     const eyebrow = computed(() => text(content.value.eyebrow));
     const locationDisplay = computed(() => text(content.value.locationDisplay) || text(quiz.value.location_display));
     const mainBenefit = computed(() => text(quiz.value.main_benefit));
@@ -381,6 +382,7 @@ export default {
       emitImageLoad,
       eyebrow,
       headline,
+      headlineHtml,
       locationDisplay,
       mainBenefit,
       mainBenefitHtml,
@@ -470,6 +472,16 @@ export default {
   font-size: var(--quiz-heading-size);
   font-weight: var(--quiz-heading-weight);
   line-height: 1.14;
+}
+
+.quiz-block__headline :deep(small) {
+  font-size: 0.72em;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.quiz-block__headline :deep(p) {
+  margin: 0;
 }
 
 .quiz-block--cta {
