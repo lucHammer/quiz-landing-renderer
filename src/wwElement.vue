@@ -20,7 +20,7 @@
 
       <section v-else-if="item.type === 'top_benefits' && topBenefits.length" class="quiz-block quiz-block--compact">
         <ul class="quiz-list quiz-list--top">
-          <li v-for="benefit in topBenefits" :key="benefit">{{ benefit }}</li>
+          <li v-for="benefit in topBenefits" :key="benefit.key" v-html="benefit.html"></li>
         </ul>
       </section>
 
@@ -216,6 +216,24 @@ function normalizeList(value) {
     .filter((entry) => entry.text || entry.emoji);
 }
 
+function normalizeTopBenefits(value) {
+  return Array.isArray(value)
+    ? value
+        .map((entry, index) => {
+          const raw = typeof entry === 'string' ? entry : entry?.text || '';
+          const cleanText = stripHtml(raw);
+          const html = sanitizeHtml(raw).replace(/\n/g, '<br>');
+
+          return {
+            key: `${index}-${cleanText || html}`,
+            text: cleanText,
+            html
+          };
+        })
+        .filter((entry) => entry.text || entry.html)
+    : [];
+}
+
 function normalizeOrder(value) {
   const order = parseMaybeJson(value, DEFAULT_ORDER);
   const source = Array.isArray(order) && order.length ? order : DEFAULT_ORDER;
@@ -295,7 +313,7 @@ export default {
     const topBenefits = computed(() => {
       const infos = parseMaybeJson(quiz.value.positionInfos, {});
       const source = content.value.topBenefits || infos?.top_benefits || [];
-      return Array.isArray(source) ? source.map(text).filter(Boolean) : [];
+      return normalizeTopBenefits(source);
     });
 
     const benefits = computed(() => normalizeList(quiz.value.benefits));
